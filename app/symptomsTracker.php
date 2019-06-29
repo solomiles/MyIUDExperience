@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class symptoms extends Model
+class symptomsTracker extends Model
 {
     //
-
     protected $fillable = [
         'user_id',
         'face',    
@@ -62,7 +61,7 @@ class symptoms extends Model
         'postIud',
         'otherPhysiological',
     ];
-    
+
     public function user()
    {
        return $this->hasMany(User::class);

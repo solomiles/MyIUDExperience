@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Survey;
 use App\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResponseController extends Controller
 {
@@ -40,9 +41,23 @@ class ResponseController extends Controller
     public function store(Request $request)
     {
         //
-        $id = $request->questionId;
-        $array = $request->all();
-        dd($array);
+        $surveyId = $request->questionId;
+        $array = $request->response;
+        if ( is_array($array) && !is_null($array[0]) ) {
+            # code...
+            
+            foreach ($surveyId as $key => $value) {
+                # code...
+                $response = new Response;
+                // $response->array(
+                    $response->user_id = auth()->user()->id;
+                    $response->survey_id = $surveyId[$key];
+                    $response->response = $array[$key]; 
+                // );
+                $response->save();
+            }
+        }
+        // dd($array);
     }
 
     /**

@@ -25,6 +25,16 @@
         <!-- Awesome Fonts -->
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}" />
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+
+      <style>
+          canvas {
+              -moz-user-select: none;
+              -webkit-user-select: none;
+              -ms-user-select: none;
+           }
+      </style>
+
         <!-- Fonts -->
         <link
         href="https://fonts.googleapis.com/css?family=Dosis:500,600"
@@ -79,7 +89,7 @@
               <ul class="navbar-nav ml-auto">
                 <li><a href=" {{ url('/') }} ">Home</a></li>
 
-                <li><a href=" {{ url('about') }} ">About MYIUD</a></li>
+                <li><a href=" {{ url('about') }} ">About</a></li>
 
                 <li><a href=" {{ url('forum') }} ">Forum</a></li>
 
@@ -96,6 +106,8 @@
                     <li class="discover-link">
                         <a href=" {{ route('register') }} " class="external discover-btn"> {{ __('Join Now') }} </a>
                     </li>
+                    
+                    
 
                 @else
                   <!-- Right Section -->
@@ -136,13 +148,17 @@
                     </div>
                     <!-- END User Dropdown -->
 
-
-
-                </div>
+                  </div>
+                  <li class="discover-link">
+                  <a href="#" class="external discover-btn" style="background:#f15c5c;  color:#fff !important; border: 1px solid #ff0000;">Donate</a>
+                </li>
+                
+                
                 <!-- END Right Section -->
                 @endguest
 
               </ul>
+              
               <!--end navbar-nav -->
             </div>
             <!--end navbar-collapse -->
@@ -231,7 +247,7 @@
         }
 
       }
-       var s = document.querySelector("#editButton").addEventListener('click', editProfile);
+       let s = document.querySelector("#editButton").addEventListener('click', editProfile);
       
 
     </script>

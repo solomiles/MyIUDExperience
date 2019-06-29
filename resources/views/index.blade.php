@@ -28,6 +28,9 @@
       <!--end container -->
     </section>
     <!--end home section -->
+
+    @auth
+    @if($hasCompletedSurvey == '')
     <script>
       const survey = () =>{
         Swal.fire({
@@ -52,6 +55,8 @@
         })
       }
   </script>
+  @endif
+  @endauth
     <!--begin section-grey -->
     <section class="section-grey section-top-border" >
       <!--begin container -->
@@ -211,7 +216,7 @@
                   <!--begin blog-item_inner -->
                   <div class="blog-item-inner">
                     <h3 class="blog-title">
-                      <a href="#">{{ $post->title}}</a>
+                      <a href="{{route('blog-post.show',$post->slug) }}">{{ $post->title}}</a>
                     </h3>
 
                     <a href="#" class="blog-icons">

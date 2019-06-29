@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\symptoms;
+use App\symptomsTracker;
 use Illuminate\Http\Request;
 
 class SymptomsController extends Controller
@@ -42,49 +42,14 @@ class SymptomsController extends Controller
     public function store(Request $request)
     {
         //
-        $app = '';
-        $phy = '';
-        $gyne = '';
-        $ment = '';
-        $oth = '';
-        $type = $request->type;
-        $appearances = $request->appearance;
-        foreach ($appearances as $appearance) {
-            # code...
-            $app.=$appearance.',';
-        }
-        $physicals = $request->physical;
-        foreach ($physicals as $physical) {
-            # code...
-            $phy.=$physical.',';
-        }
-        $gynecologicals = $request->gynecological;
-        foreach ($gynecologicals as $gynecological) {
-            # code...
-            $gyne.=$gynecological.',';
-        }
-        $mentals = $request->mental;
-        foreach ($mentals as $mental) {
-            # code...
-            $ment.=$mental.',';
-        }
-        $others = $request->other;
-        foreach ($others as $other) {
-            # code...
-            $oth.=$other.',';
-        }
-        $symptoms = new symptoms;
+        
+        // $symptoms = new symptomsTracker;
     
-        $symptoms->user_id = $request->user()->id;
-        $symptoms->type = $type;
-        $symptoms->apperance_change = $app;
-        $symptoms->physical_pain = $phy;
-        $symptoms->gynecological_issue = $gyne;
-        $symptoms->mental_health = $ment;
-        $symptoms->other = $oth;
-        $symptoms->save();
+        // $user_id = $request->user()->id;
+        // symptomsTracker::create($request->all());
+        
 
-        return redirect()->route('track-symptoms.index')
+        return redirect()->route('track-symptoms.result')
             ->with('success', 'Symptoms Tracked Successfully');
         // dd($request->user()->id, $type, $app, $phy, $gyne, $ment, $oth);
     }
@@ -98,6 +63,19 @@ class SymptomsController extends Controller
     public function show(symptoms $symptoms)
     {
         //
+        return view('symptoms_myiud_result');
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\symptomsTracker  $symptomsTracker
+     * @return \Illuminate\Http\Response
+     */
+    public function result(symptoms $symptoms)
+    {
+        //
+        return view('symptoms_myiud_result');
     }
 
     /**

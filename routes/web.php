@@ -56,3 +56,5 @@ Route::resource('track-symptoms', 'SymptomsController');
 Route::get('period-tracker', function() {
     return view('period_tracker');
 });
+
+// Route::get('tracked-symptoms-result','SymptomsController@result');

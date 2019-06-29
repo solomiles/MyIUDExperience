@@ -13,20 +13,7 @@ class CreateSymptomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('symptoms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->string('type');
-            $table->string('apperance_change');
-            $table->string('physical_pain');
-            $table->string('gynecological_issue');
-            $table->string('mental_health');
-            $table->string('other');
-            $table->timestamps();
-        });
+        
     }
 
     /**

@@ -31,6 +31,7 @@
     
     
     <link href="{{ asset('assets/multistepform/css/style.css')}}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -189,6 +190,46 @@
                                 </label>
                             </div>
                             @endif
+                            @if($option->option_nine != null)
+                            <div class="custom-control custom-{{$survey->type}}">
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_nine}}9" value="{{ $option->option_nine }}" >
+                                <label class="custom-control-label" for="{{$option->option_nine}}9">
+                                    {{ $option->option_nine }}
+                                </label>
+                            </div>
+                            @endif
+                            @if($option->option_ten != null)
+                            <div class="custom-control custom-{{$survey->type}}">
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_ten}}10" value="{{ $option->option_ten }}" >
+                                <label class="custom-control-label" for="{{$option->option_ten}}10">
+                                    {{ $option->option_ten }}
+                                </label>
+                            </div>
+                            @endif
+                            @if($option->option_eleven != null)
+                            <div class="custom-control custom-{{$survey->type}}">
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_eleven}}11" value="{{ $option->option_eleven }}" >
+                                <label class="custom-control-label" for="{{$option->option_eleven}}11">
+                                    {{ $option->option_eleven }}
+                                </label>
+                            </div>
+                            @endif
+                            @if($option->option_twelve != null)
+                            <div class="custom-control custom-{{$survey->type}}">
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_twelve}}12" value="{{ $option->option_twelve }}" >
+                                <label class="custom-control-label" for="{{$option->option_twelve}}12">
+                                    {{ $option->option_twelve }}
+                                </label>
+                            </div>
+                            @endif
+                            @if($option->option_thirteen != null)
+                            <div class="custom-control custom-{{$survey->type}}">
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_thirteen}}13" value="{{ $option->option_thirteen }}" >
+                                <label class="custom-control-label" for="{{$option->option_thirteen}}13">
+                                    {{ $option->option_thirteen }}
+                                </label>
+                            </div>
+                            @endif
                         @endforeach
                         @endif
                         @if($loop->first)
@@ -211,13 +252,14 @@
         
 
     </div>
-    
-</div>
-    <div class="dme_link">
-        <p><a href="#" >Abardon Survey</a></p>
+<footer> 
     </div>
-<!-- /.MultiStep Form -->
-</div>
+        <div class="dme_link">
+            <p><a href="#" >Abardon Survey</a></p>
+        </div>
+    <!-- /.MultiStep Form -->
+    </div>
+</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -229,6 +271,30 @@
 <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
 <!-- <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script> -->
 <script src="{{ asset('assets/multistepform/js/msform.js')}}"></script>
+<script>
+    Swal.fire({
+        title: '<strong>User Demographic Information</strong>',
+        type: 'info',
+        html:
+        'Please be honest when filling this survey. The survey takes less than 5 minutes.'+ 
+        'Your responses are important as it will be use to help other'+ 
+        'woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'+
+        'Please lets help each other.'+
+        '*Correlation does not imply causation but it can start a conversation.*',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: true,
+        cancelButtonText:
+        '<a style="color:#fff;"><i class="fa"></i>Start</a>',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        animation: false,
+        customClass: {
+        popup: 'animated tada'
+        }
+        // cancelButtonAriaLabel: 'Thumbs down',
+    })
+</script>
+
 
 </body>
 </html>

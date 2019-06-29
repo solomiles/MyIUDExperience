@@ -44,12 +44,14 @@ class SurveyController extends Controller
     {
         //
         // echo 'hit';
+        // store survey question
         $survey =  new Survey;
         
         $survey->question = $request->question;
         $survey->type = $request->type;
         $survey->save();
 
+        // store options 
         $options = new Options;
         $options->survey_id = $survey->id;
         $options->option_one = $request->optionOne;
@@ -60,12 +62,17 @@ class SurveyController extends Controller
         $options->option_six = $request->optionSix;
         $options->option_seven = $request->optionSeven;
         $options->option_eight = $request->optionEight;
+        $options->option_nine = $request->optionNine;
+        $options->option_ten = $request->optionTen;
+        $options->option_eleven = $request->optionEleven;
+        $options->option_twelve = $request->optiontwelve;
+        $options->option_thirteen = $request->optionThirteen;
         $options->save();
         
         // dd($survey->id);
         // $options = new Options;
         
-
+        // redirect after saving
         return redirect()->route('add-survey-questions.index')
             ->with('success', 'Question added successfully');
 

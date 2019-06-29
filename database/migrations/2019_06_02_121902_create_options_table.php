@@ -27,6 +27,11 @@ class CreateOptionsTable extends Migration
             $table->text('option_six')->nullable($value = true);
             $table->text('option_seven')->nullable($value = true);
             $table->text('option_eight')->nullable($value = true);
+            $table->text('option_nine')->nullable($value = true);
+            $table->text('option_ten')->nullable($value = true);
+            $table->text('option_eleven')->nullable($value = true);
+            $table->text('option_twelve')->nullable($value = true);
+            $table->text('option_thirteen')->nullable($value = true);
             $table->timestamps();
         });
     }
