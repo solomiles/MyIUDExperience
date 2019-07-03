@@ -19,7 +19,7 @@ Auth::routes(['verify' => true]); //['verify' => true]
 
 
 Route::get('/', 'HomeController@index')->name('index');
-
+Route::resource('home', 'HomeController');
 Route::resource('survey', 'ResponseController');
 
 Route::resource('forum', 'ForumController'); //forum route

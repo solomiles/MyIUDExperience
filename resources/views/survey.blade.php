@@ -123,114 +123,37 @@
                         <h3 class="fs-subtitle">Please answer correctly</h3>
                         <input type="" hidden value=" {{$survey->id}} "  name="questionId[]" >
                         @if($survey->type == 'text')
-                        <input type=" {{ $survey->type}} "  name="response[]" >                        
+                        <input required type=" {{ $survey->type}} "  name="response[]" >                        
                         @elseif($survey->type == 'radio' || $survey->type == 'checkbox')
                         @foreach($survey->options as $option)
-                            @if($option->option_one != null)
                             <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_one}}1" value="{{ $option->option_one }}" >
-                                <label class="custom-control-label" for="{{$option->option_one}}1">
-                                    {{ $option->option_one }}
+                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->id}}" value="{{ $option->options }}" >
+                                <label class="custom-control-label" for="{{$option->id}}">
+                                    {{ $option->options }}
                                 </label>
                             </div>
-                            @endif
-                            @if($option->option_two != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_two}}2" value="{{ $option->option_two }}" >
-                                <label class="custom-control-label" for="{{$option->option_two}}2">
-                                    {{ $option->option_two }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_three != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_three}}3" value="{{ $option->option_three }}" >
-                                <label class="custom-control-label" for="{{$option->option_three}}3">
-                                    {{ $option->option_three }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_four != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_four}}4" value="{{ $option->option_four }}" >
-                                <label class="custom-control-label" for="{{$option->option_four}}4">
-                                    {{ $option->option_four }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_five != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_five}}5" value="{{ $option->option_five }}" >
-                                <label class="custom-control-label" for="{{$option->option_five}}5">
-                                    {{ $option->option_five }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_six != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_six}}6" value="{{ $option->option_six }}" >
-                                <label class="custom-control-label" for="{{$option->option_six}}6">
-                                    {{ $option->option_six }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_seven != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_seven}}7" value="{{ $option->option_seven }}" >
-                                <label class="custom-control-label" for="{{$option->option_seven}}7">
-                                    {{ $option->option_seven }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_eight != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_eight}}8" value="{{ $option->option_eight }}" >
-                                <label class="custom-control-label" for="{{$option->option_eight}}8">
-                                    {{ $option->option_eight }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_nine != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_nine}}9" value="{{ $option->option_nine }}" >
-                                <label class="custom-control-label" for="{{$option->option_nine}}9">
-                                    {{ $option->option_nine }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_ten != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_ten}}10" value="{{ $option->option_ten }}" >
-                                <label class="custom-control-label" for="{{$option->option_ten}}10">
-                                    {{ $option->option_ten }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_eleven != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_eleven}}11" value="{{ $option->option_eleven }}" >
-                                <label class="custom-control-label" for="{{$option->option_eleven}}11">
-                                    {{ $option->option_eleven }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_twelve != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_twelve}}12" value="{{ $option->option_twelve }}" >
-                                <label class="custom-control-label" for="{{$option->option_twelve}}12">
-                                    {{ $option->option_twelve }}
-                                </label>
-                            </div>
-                            @endif
-                            @if($option->option_thirteen != null)
-                            <div class="custom-control custom-{{$survey->type}}">
-                                <input class="custom-control-input" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="{{$option->option_thirteen}}13" value="{{ $option->option_thirteen }}" >
-                                <label class="custom-control-label" for="{{$option->option_thirteen}}13">
-                                    {{ $option->option_thirteen }}
-                                </label>
-                            </div>
-                            @endif
+                            
                         @endforeach
+                        <!-- <div class="custom-control custom-{{$survey->type}}">
+                            <input class="custom-control-input radioId" type="{{$survey->type}}" name="response[].{{$option->survey_id}}" id="others[]">
+                            <label class="custom-control-label" for="others[]">
+                                Others (Please Specify)
+                            </label>
+
+                            <input type="text" oninput="checkIt()"  class="form-control otherSpecify" id="fuck[]" name="response[].{{$option->survey_id}}" placeholder="Please Specify">
+                        </div>
+                        <script>
+            function checkIt() {
+            var othersValue = document.getElementById('fuck[]').value;
+            var radioValue = document.getElementById('others[]');
+            
+                console.log(othersValue);
+                
+
+                radioValue.value = othersValue;
+                console.log(radioValue.value);
+            }
+        </script> -->
                         @endif
                         @if($loop->first)
                         <input type="button" name="next" class="next action-button" value="Next">
@@ -249,6 +172,7 @@
             
            
         </form>
+        
         
 
     </div>
@@ -272,27 +196,75 @@
 <!-- <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js')}}"></script> -->
 <script src="{{ asset('assets/multistepform/js/msform.js')}}"></script>
 <script>
-    Swal.fire({
-        title: '<strong>User Demographic Information</strong>',
+    // Swal.fire({
+    //     title: '<strong>User Demographic Information</strong>',
+    //     type: 'info',
+    //     html:
+    //     'Please be honest when filling this survey. The survey takes less than 5 minutes.',
+    //     showCloseButton: true,
+
+    //     focusConfirm: true,
+    //     confirmButtonText: 'Start',
+    //     animation: false,
+    //     customClass: {
+    //     popup: 'animated tada'
+    //     }
+    //     // cancelButtonAriaLabel: 'Thumbs down',
+    // })
+
+    // Swal.fire({
+    //     title: '<strong>User Demographic Information</strong>',
+    //     type: 'info',
+    //     html:
+    //     'Your responses are important as it will be use to help other'+ 
+    //     'woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'+
+    //     'Please lets help each other.'+
+    //     ' <em>"Correlation does not imply causation but it can start a conversation."</em>',
+    //     showCloseButton: true,
+
+    //     focusConfirm: true,
+
+    //     confirmButtonAriaLabel: 'Thumbs up, great!',
+    //     animation: false,
+    //     customClass: {
+    //     popup: 'animated tada'
+    //     }
+    //     // cancelButtonAriaLabel: 'Thumbs down',
+    // })
+    Swal.mixin({
+        // input: 'text',
         type: 'info',
-        html:
-        'Please be honest when filling this survey. The survey takes less than 5 minutes.'+ 
-        'Your responses are important as it will be use to help other'+ 
-        'woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'+
-        'Please lets help each other.'+
-        '*Correlation does not imply causation but it can start a conversation.*',
-        showCloseButton: true,
+        confirmButtonText: 'Next',
         showCancelButton: true,
-        focusConfirm: true,
-        cancelButtonText:
-        '<a style="color:#fff;"><i class="fa"></i>Start</a>',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
-        animation: false,
+        animation: true,
         customClass: {
         popup: 'animated tada'
+        },
+        // progressSteps: ['1', '2', '3']
+        }).queue([
+        {
+            title: '<strong>User Demographic Information</strong>',
+            text: 'Please be honest when filling this survey. The survey takes less than 5 minutes.'
+        },
+        {
+            title: '<strong>User Demographic Information</strong>',
+            text: 'Your responses are important as it will be use to help other woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'
+        },
+        {
+            title: '<strong>User Demographic Information</strong>',
+            text: 'Please lets help each other.'
         }
-        // cancelButtonAriaLabel: 'Thumbs down',
-    })
+        ]).then( (result) => {
+        
+            Swal.fire({
+            title: 'All Set!',
+            html:
+            '<em>"Correlation does not imply causation but it can start a conversation."</em>',
+            confirmButtonText: 'Start'
+            })
+            
+        }
+        )
 </script>
 
 

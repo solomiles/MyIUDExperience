@@ -49,7 +49,7 @@ class SymptomsController extends Controller
         // symptomsTracker::create($request->all());
         
 
-        return redirect()->route('track-symptoms.result')
+        return redirect()->route('track-symptoms')
             ->with('success', 'Symptoms Tracked Successfully');
         // dd($request->user()->id, $type, $app, $phy, $gyne, $ment, $oth);
     }
@@ -63,7 +63,6 @@ class SymptomsController extends Controller
     public function show(symptoms $symptoms)
     {
         //
-        return view('symptoms_myiud_result');
     }
 
      /**
@@ -72,7 +71,7 @@ class SymptomsController extends Controller
      * @param  \App\symptomsTracker  $symptomsTracker
      * @return \Illuminate\Http\Response
      */
-    public function result(symptoms $symptoms)
+    public function result(symptomsTracker $symptomsTracker)
     {
         //
         return view('symptoms_myiud_result');

@@ -30,6 +30,7 @@ class ResponseController extends Controller
     public function create()
     {
         //
+        // return view('completedSurvey');
     }
 
     /**
@@ -56,6 +57,9 @@ class ResponseController extends Controller
                 // );
                 $response->save();
             }
+
+            return redirect()->route('home.index')
+                ->with('success', 'Thanks for filling out our survey');
         }
         // dd($array);
     }

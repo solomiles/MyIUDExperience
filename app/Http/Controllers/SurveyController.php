@@ -52,22 +52,22 @@ class SurveyController extends Controller
         $survey->save();
 
         // store options 
-        $options = new Options;
-        $options->survey_id = $survey->id;
-        $options->option_one = $request->optionOne;
-        $options->option_two = $request->optionTwo;
-        $options->option_three = $request->optionThree;
-        $options->option_four = $request->optionFour;
-        $options->option_five = $request->optionFive;
-        $options->option_six = $request->optionSix;
-        $options->option_seven = $request->optionSeven;
-        $options->option_eight = $request->optionEight;
-        $options->option_nine = $request->optionNine;
-        $options->option_ten = $request->optionTen;
-        $options->option_eleven = $request->optionEleven;
-        $options->option_twelve = $request->optiontwelve;
-        $options->option_thirteen = $request->optionThirteen;
-        $options->save();
+        
+        $array = $request->options;
+        
+
+        if ( is_array($array) && !is_null($array[0]) ) {
+            # code...
+            
+            foreach ($array as $key => $value) {
+                # code...
+                $options = new Options;
+                $options->survey_id = $survey->id;
+                $options->options = $array[$key];
+                $options->save();
+            }
+        }
+        
         
         // dd($survey->id);
         // $options = new Options;

@@ -19,19 +19,8 @@ class CreateOptionsTable extends Migration
             $table->foreign('survey_id')->references('id')
                 ->on('surveys')
                 ->onDelete('cascade');
-            $table->text('option_one')->nullable($value = true);
-            $table->text('option_two')->nullable($value = true);
-            $table->text('option_three')->nullable($value = true);
-            $table->text('option_four')->nullable($value = true);
-            $table->text('option_five')->nullable($value = true);
-            $table->text('option_six')->nullable($value = true);
-            $table->text('option_seven')->nullable($value = true);
-            $table->text('option_eight')->nullable($value = true);
-            $table->text('option_nine')->nullable($value = true);
-            $table->text('option_ten')->nullable($value = true);
-            $table->text('option_eleven')->nullable($value = true);
-            $table->text('option_twelve')->nullable($value = true);
-            $table->text('option_thirteen')->nullable($value = true);
+            $table->text('options')->nullable($value = true);
+            
             $table->timestamps();
         });
     }

@@ -28,7 +28,6 @@
       <!--end container -->
     </section>
     <!--end home section -->
-
     @auth
     @if($hasCompletedSurvey == '')
     <script>
@@ -38,13 +37,13 @@
           type: 'info',
           html:
             'Please click <b>start survey</b>, ' +
-            'to fil out the survey form'+'<br>It takes less than 5 minutes. <em>Your feedback is important to us.</em>',
-          showCloseButton: true,
-          showCancelButton: true,
-          focusConfirm: true,
-          confirmButtonText:
-            '<a style="color:#fff;" href="/survey"><i class="fa"></i>Start survey</a>',
+            'to fil out the survey form'+'<br>It takes less than 5 minutes. <em>Your feedback is important to us.</em> ' +'<br>'+
+            '<a class="btn btn-primary" href="/survey"><i class="fa"></i>Start survey</a>',
           confirmButtonAriaLabel: 'Thumbs up, great!',
+          showCloseButton: true,
+          showConfirmButton: false,
+          // showCancelButton: true,
+          // focusConfirm: true,
           cancelButtonText:
           'Not now!',
           animation: false,
@@ -55,7 +54,23 @@
         })
       }
   </script>
-  @endif
+   @endif
+    @if(Session::has('success'))
+      <script>
+        Swal.fire({
+
+        title: '<strong>User Demographic Information</strong>',
+        type: 'success',
+        html:
+            'Thanks For Sharing Your Experience With Us',
+        // showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i>Continue To MyIUDExperience.com',
+        // confirmButtonAriaLabel: 'Thumbs up, great!',
+        })
+    </script>
+    @endif
   @endauth
     <!--begin section-grey -->
     <section class="section-grey section-top-border" >
