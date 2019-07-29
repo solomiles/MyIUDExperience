@@ -35,7 +35,7 @@ Route::resource('manage-blog', 'BlogController'); // admin blog control route
 Route::resource('add-survey-questions', 'SurveyController'); // admin blog control route
 
 
-Route::get('manage-symptoms', 'AdminController@manageSymptoms');
+// Route::get('manage-symptoms', 'AdminController@manageSymptoms');
 
 Route::get('contact', function() {
     return view('contact');
@@ -51,10 +51,15 @@ Route::resource('blog-post', 'HomeController'); // full blog post
 
 Route::resource('profile', 'ProfileController'); //user profile
 
-Route::resource('track-symptoms', 'SymptomsController');
+Route::resource('manage-symptoms', 'SymptomsController'); // admin add symptoms name
+
+Route::resource('track-symptoms', 'SymptomsTrackerController'); // track Symptoms
 
 Route::get('period-tracker', function() {
     return view('period_tracker');
 });
 
-// Route::get('tracked-symptoms-result','SymptomsController@result');
+// 
+Route::get('tracked-symptoms-result','SymptomsController@result');
+
+Route::post('daily-symptoms-chart', 'SymptomsTrackerController@dailyGraph');

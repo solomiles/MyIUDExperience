@@ -130,8 +130,11 @@
                                             <td class=" ">
                                                 <div class="btn-group">
                                                     <button class="btn btn-primary"><span class="fa fa-edit"></span></button>
-                                                    <button class="btn btn-danger"><span class="fa fa-trash"></span></button>
-                                                </div>
+                                                    <form action="{{route('add-survey-questions.destroy', $survey->id )}}" method="post">
+                                                        @csrf
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                                                    </form>
                                             </td>
                                            
                                             

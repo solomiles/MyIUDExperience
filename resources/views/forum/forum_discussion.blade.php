@@ -137,12 +137,12 @@
                                     
                                     <tr>
                                         <td class="d-none d-sm-table-cell text-center">
-                                            <p>
+                                            <!-- <p>
                                                 <a href="be_pages_generic_profile.html">
                                                     <img class="img-avatar" src="assets/media/avatars/avatar10.jpg" alt="">
                                                 </a>
                                             </p>
-                                            <p class="font-size-sm">218 Posts<br>Level 10</p>
+                                            <p class="font-size-sm">218 Posts<br>Level 10</p> -->
                                         </td>
                                         <td>
                                             <form action=" {{ route('forum-discussion.store')}} " method="POST" >

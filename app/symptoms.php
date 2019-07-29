@@ -9,62 +9,17 @@ class symptoms extends Model
     //
 
     protected $fillable = [
-        'user_id',
-        'face',    
-        'hairGrowth',
-        'bodyAcne',
-        'thiningHair',
-        'weightGain',
-        'otherAppear',
-        'deviceExpelle',    
-        'ruptured',
-        'spodaric',
-        'cysts',
-        'urinary',
-        'pelvic',    
-        'painDuringSex',
-        'bacterial',
-        'yeast',
-        'unusualVaginal',
-        'genitialSores',
-        'swollenBreast',
-        'perforation',
-        'missedMenstrual', 
-        'toxicShock',
-        'otherGynecological',
-        'depression',
-        'moodSwings',
-        'anger',
-        'lostSexualDesire',
-        'anxiety',
-        'otherMental',
-        'memoryLoss',    
-        'fatigue',
-        'lowerBackPain',
-        'lostOfBalance',
-        'headache',
-        'dizziness',
-        'nausea',
-        'endometriosis',
-        'eczema',
-        'itchySkin',
-        'abdominalPain',
-        'anaphylactic',    
-        'bloated',
-        'dryEyes',
-        'muscleWeakness',
-        'muscleSpasm',
-        'constipation',
-        'tingling',
-        'edema',
-        'bradycardia',
-        'breastTenderness',    
-        'postIud',
-        'otherPhysiological',
+        'symptoms_category_id','symptoms_name',
+        
     ];
-    
-    public function user()
+   
+
+   public function symptomstracker()
    {
-       return $this->hasMany(User::class);
+       return $this->hasMany(SymptomsTracker::class);
+   }
+   public function symptomscategory()
+   {
+       return $this->belongsTo(SymptomsCategory::class);
    }
 }

@@ -118,8 +118,15 @@ class SurveyController extends Controller
      * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Survey $survey)
+    public function destroy(Survey $survey,$id)
     {
         //
+        // dd($id);
+        survey::find($id)->delete();
+        
+            return redirect()->route('manage-symptoms.index')
+    
+                ->with('success','Symptoms deleted successfully');
+    
     }
 }

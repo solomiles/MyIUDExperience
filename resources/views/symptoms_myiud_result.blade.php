@@ -41,95 +41,67 @@
           </div>
         @endif
       
-          <div class="block-content">
-              <div id="container" style="width: 110%; height: 110%;">
-                  <canvas id="myChart"></canvas>
-                </div>
-            </div>
+          
                 <!-- END Page Content -->
         </main>
       </div>
         <!--end row -->
-
+        <div class="block-content">
+          <div id="container" style="width: auto; height: auto;">
+              <canvas id="myChart"></canvas>
+            </div>
+        </div>
       <!--end container -->
     </section>
     <!--end section-grey -->
-
+    @foreach($results as $result)
+      
+        <!-- <input type="hidden" value="{{$result->symptoms->symptoms_name}}"> -->
+      
+    @endforeach
    <script>
+   var shows = @json($results->toArray());
+   var symptoms = [];
+   var symptomsDate = [];
+   var levels = [];
+   shows.forEach(show => {
+    //  show.symptoms_level
+  //  console.table(show.symptoms_id);
+    symptoms.push(show.symptoms.symptoms_name);
+    levels.push(show.symptoms_level);
+    symptomsDate.push(show.created_at);
+
+   })
+  //  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+   var day = new Date(symptomsDate[0]);
+  //  console.log(day.toDateString())
+   
+  //  var face = result.symptoms_id;
     var config = {
       type: 'horizontalBar',
       data: {
-        labels: ['face',    
-        'hairGrowth',
-        'bodyAcne',
-        'thiningHair',
-        'weightGain',
-        // 'otherAppear',
-        'deviceExpelle',    
-        'ruptured',
-        'spodaric',
-        'cysts',
-        'urinary',
-        'pelvic',    
-        'painDuringSex',
-        'bacterial',
-        'yeast',
-        'unusualVaginal',
-        'genitialSores',
-        'swollenBreast',
-        'perforation',
-        'missedMenstrual', 
-        'toxicShock',
-        'otherGynecological',
-        'depression',
-        'moodSwings',
-        'anger',
-        'lostSexualDesire',
-        'anxiety',
-        // 'otherMental',
-        'memoryLoss',    
-        'fatigue',
-        'lowerBackPain',
-        'lostOfBalance',
-        'headache',
-        'dizziness',
-        'nausea',
-        'endometriosis',
-        'eczema',
-        'itchySkin',
-        'abdominalPain',
-        'anaphylactic',    
-        'bloated',
-        'dryEyes',
-        'muscleWeakness',
-        'muscleSpasm',
-        'constipation',
-        'tingling',
-        'edema',
-        'bradycardia',
-        'breastTenderness',    
-        'postIud',
-        // 'otherPhysiological'
-      ],
+        labels:   symptoms  
+        
+      ,
         options: {
         title: {
           display: true,
-          text: 'Symptoms June 28, 2019',
+          text: 'Symptoms '+day.toDateString(),
           position: 'top'
             }
         },
         datasets: [{
           
-          label: "Cycle Started June 28, 2019",
-          data: [20, 50, 80, 81, 56, 0],
-          backgroundColor: "#c45850",
+          label: "Cycle Started "+day.toDateString(),
+          data: levels,
+          backgroundColor: '#f0f',
           fill: false
         }]
       },
         options: {
           title: {
           display: true,
-          text: 'Symptoms June 28, 2019',
+          text: 'Symptoms '+day.toDateString(),
           position: 'top',
           fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
           fontColor: '#880cbb',
@@ -147,8 +119,8 @@
                     return 'Moderate';
                   else if (value === 80)
                     return 'Severe';
-                  else
-                    return '';
+                  else if (value === 100)
+                    return 'hjd';
                 },
                 display: true,
               fontColor: '#2196f3',

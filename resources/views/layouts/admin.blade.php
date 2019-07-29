@@ -71,18 +71,57 @@
                             <span class="nav-main-link-name">Manage User Account</span>
                         </a>
                     </li>
-                    <li class="nav-main-item">
+                    <!-- <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ url('add-survey-questions')}}">
                             <i class="nav-main-link-icon si si-user-female"></i>
                             <span class="nav-main-link-name">Manage Survey</span>
                         </a>
-                    </li>
+                    </li> -->
+                    
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ url('manage-symptoms')}}">
-                            <i class="nav-main-link-icon si si-user-female"></i>
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-note"></i>
+                            <span class="nav-main-link-name">Manage Survey</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-survey-questions')}}">
+                                    <span class="nav-main-link-name">Add Survey Questions</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="#">
+                                    <span class="nav-main-link-name">Manage Survey Response</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-new-category')}}">
+                                    <span class="nav-main-link-name">Add Category</span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-bulb"></i>
                             <span class="nav-main-link-name">Manage Symptoms</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('manage-symptoms')}}">
+                                    <i class="nav-main-link-icon si si-user-female"></i>
+                                    <span class="nav-main-link-name">Add Symptoms</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-new-category')}}">
+                                    <span class="nav-main-link-name">Add Category</span>
+                                </a>
+                            </li> -->
+                        </ul>
                     </li>
+                    
 
                     <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -228,7 +267,7 @@
        <script>
            $(document).ready(function(){
             // for add new type button
-            var maxField = 20; //Input fields increment limitation
+            var maxField = 30; //Input fields increment limitation
             var addButton = $('#addOptions'); //Add button selector
             
             var wrapper = $('.field_wrapper'); //Input field wrapper

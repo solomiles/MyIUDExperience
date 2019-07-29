@@ -95,13 +95,13 @@
                 end: stop,
                 // resourceId: 'g'
                 });
-            swal({
-                title: "Your next Period",
+            // swal({
+            //     title: "Your next Period",
                 
-                text: "Starts : "+now+
-                "\nEnds : "+stop,
-                icon: "success",
-            });
+            //     text: "Starts : "+now+
+            //     "\nEnds : "+stop,
+            //     icon: "success",
+            // });
             console.log( now,stop);
             // console.log(
             //   'dateClick',
@@ -119,7 +119,7 @@
             });
 
             calendar.render();
-            swal("Select your last Period date to calculate your next Period dates.");
+            // swal("Select your last Period date to calculate your next Period dates.");
 
         });
 

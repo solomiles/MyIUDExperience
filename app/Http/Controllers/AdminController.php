@@ -43,12 +43,12 @@ class AdminController extends Controller
         //
     }
 
-    public function manageSymptoms()
-    {
-        $symptoms = symptoms::all();
+    // public function manageSymptoms()
+    // {
+    //     $symptoms = symptoms::all();
 
-        return view('admin.manage_symptoms', compact('symptoms'));
-    }
+    //     return view('admin.manage_symptoms', compact('symptoms'));
+    // }
 
     /**
      * Display the specified resource.

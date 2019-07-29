@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\symptomsTracker;
+use App\symptoms;
+use App\SymptomsCategory;
 use Illuminate\Http\Request;
 
 class SymptomsController extends Controller
@@ -19,8 +20,10 @@ class SymptomsController extends Controller
     public function index()
     {
         //
+        $symptomsCategories = SymptomsCategory::all();
 
-        return view('symptoms_myiud');
+        return view('admin.manage_symptoms', compact('symptomsCategories'));
+        // return view('symptoms_myiud');
     }
 
     /**
@@ -42,16 +45,33 @@ class SymptomsController extends Controller
     public function store(Request $request)
     {
         //
-        
-        // $symptoms = new symptomsTracker;
-    
-        // $user_id = $request->user()->id;
-        // symptomsTracker::create($request->all());
+        $this->validate($request, [
+            
+            'category' => 'required',
+        ]);
+        $symptoms_category = new SymptomsCategory;
+        $symptoms_category->category = $request->category;
+        $symptoms_category->save();
+
+        $array = $request->options;
         
 
-        return redirect()->route('track-symptoms')
-            ->with('success', 'Symptoms Tracked Successfully');
-        // dd($request->user()->id, $type, $app, $phy, $gyne, $ment, $oth);
+        if ( is_array($array) && !is_null($array[0]) ) {
+            # code...
+            
+            foreach ($array as $key => $value) {
+                # code...
+                $symptoms = new symptoms;
+                $symptoms->symptoms_category_id = $symptoms_category->id;
+                $symptoms->symptoms_name = $array[$key];
+                $symptoms->save();
+            }
+        }
+        
+        return redirect()->route('manage-symptoms.index')
+            ->with('success', 'Symptoms added successfully');
+
+        
     }
 
     /**
@@ -71,7 +91,7 @@ class SymptomsController extends Controller
      * @param  \App\symptomsTracker  $symptomsTracker
      * @return \Illuminate\Http\Response
      */
-    public function result(symptomsTracker $symptomsTracker)
+    public function result()
     {
         //
         return view('symptoms_myiud_result');
@@ -106,8 +126,15 @@ class SymptomsController extends Controller
      * @param  \App\symptoms  $symptoms
      * @return \Illuminate\Http\Response
      */
-    public function destroy(symptoms $symptoms)
+    public function destroy(symptoms $symptoms,$id)
     {
         //
+        // dd($id);
+        SymptomsCategory::find($id)->delete();
+        
+            return redirect()->back()
+    
+                ->with('success','Symptoms deleted successfully');
+    
     }
 }
