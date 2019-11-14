@@ -55,9 +55,9 @@ Route::resource('manage-symptoms', 'SymptomsController'); // admin add symptoms 
 
 Route::resource('track-symptoms', 'SymptomsTrackerController'); // track Symptoms
 
-Route::get('period-tracker', function() {
-    return view('period_tracker');
-});
+Route::resource('period-tracker', 'EventController');
+Route::post('add-new-symptoms/store', 'SymptomsController@store');
+Route::get('track-symptoms', 'SymptomsTrackerController@index');
 
 // 
 Route::get('tracked-symptoms-result','SymptomsController@result');

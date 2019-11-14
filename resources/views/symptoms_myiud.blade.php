@@ -44,6 +44,21 @@
                 @foreach ($errors->all() as $message)
 
                     <li class="text-danger">{{ $message }}</li>
+                    <script>
+                    Swal.fire({
+                                                       
+                      type: 'error',
+                      html: '<b style="color:red"> {{!! $message !!}}</b> ',
+                        showCloseButton: true,
+                      showConfirmButton: true,  
+                      focusConfirm: true,
+                      animation: false,
+                      customClass: {
+                        popup: 'animated tada'
+                      }
+                    
+                    })
+                  </script>
 
                 @endforeach
 
@@ -80,7 +95,7 @@
                             <option value="{{$date->created_at}}">{{date('M d, Y', strtotime($date->created_at))}}</option>
                             @endforeach
                           @else
-                            <option disabled >No Dates Found</option>
+                            <option disabled >No Tracked Dates Found</option>
                           @endif
                           </select>
                           
@@ -98,6 +113,21 @@
           </div>
             <br>
           @if(Session::has('results'))
+          <script>
+            Swal.fire({
+                                                
+              type: 'success',
+              html: '<b style="color:#a5dc86"> Tracked successfully</b> ',
+                showCloseButton: true,
+              showConfirmButton: true,  
+              focusConfirm: true,
+              animation: false,
+              customClass: {
+                popup: 'animated tada'
+              }
+            
+            })
+          </script>
           <div class="row">
             <div class="col-md-12">
               <div class=" col-md-8">
@@ -134,11 +164,12 @@
           </div>
 
           @else
+          @if(count($symptoms) > 0)
                       <div class="table-responsive">
                             <form action=" {{ route('track-symptoms.store') }}" role="form" method="Post">
                                @csrf 
                                <input value=" {{auth::user()->id}} " name="user_id" type="hidden">
-                               @if(count($symptoms) > 0)
+                               
                                @foreach($symptoms as $symptom)
                                
                                 <table class="table table-striped table-striped table-vcenter">
@@ -193,51 +224,88 @@
                                   <td>
                                       <div class="form-group">
                                         <label for="example-text-input">Other {{ $symptom->category }} (Please Specify)</label>
-                                        <input type="text" id="newSymptoms{{$value->id}}" class="form-control new_appearance" id="example-text-input" name="" placeholder="Enter Symptoms">
-                                          <br><button type="button" id="addOptions.{{$value->id}}" class="btn btn-primary add_button_apperamce">Add</button>
+                                        <!-- <form id="addForm" action="#" > -->
+                                        @csrf
+                                          <input id="categoryId{{$symptom->id}}" value="{{$symptom->id}}" type="hidden">
+                                        <input type="text" id="" class="form-control newSymptoms{{$symptom->id}}" value="" placeholder="Enter Symptoms">
+                                          <br><button type="button" id="addOptions{{$symptom->id}}" class="btn btn-primary">
+                                          <span id="loading{{$symptom->id}}" style="display:none" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                             Add</button>
+                                          
+                                        <!-- </form> -->
+                                        <script>
+                                          $(document).ready(function () {
+                                            $('#addOptions{{$symptom->id}}').click(function (e) {
+                                              // $('#addForm').submit(function(e) {
+                                              //   // 
+                                              // });
+                                              buttonText = $('#addOptions{{$symptom->id}}');
+                                              var symptomsName = $(".newSymptoms{{$symptom->id}}").val();
+                                              var categoryId = $("#categoryId{{$symptom->id}}").val();
+                                              var loading = $('#loading{{$symptom->id}}');
+                                              if (symptomsName !== "") {
+                                                e.preventDefault();
+                                              
+                                                  // console.log(categoryId);
+                                                $.ajaxSetup({
+                                                  headers: {
+                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                  }
+                                                });
+
+                                                $.ajax({
+                                                  url: "{{url('add-new-symptoms/store')}}",
+                                                  data: { categoryId: categoryId, symptomsName: symptomsName},
+                                                  type: "POST",
+                                                  dataType: "json",
+                                                  beforeSend(xhr,data){
+
+                                                    loading.show();
+                                                    buttonText.text('Loading...');
+                                                    console.log(data);
+                                                  },
+                                                  success: function (data) {
+                                                      // displayMessage
+                                                      loading.hide();
+                                                      buttonText.text('Add');
+                                                      
+                                                      displayMessage("Added Successfully");
+                                                      window.location.reload();
+                                                  }
+                                                });
+
+                                               var value =  "{{url('track-symptoms')}}"
+                                              }
+                                            });
+                                            function displayMessage(message) {
+                                              Swal.fire({
+                                                       
+                                                       type: 'success',
+                                                       html:
+                                                       message,
+                                                         showCloseButton: true,
+                                                       showConfirmButton: true,  
+                                                       focusConfirm: true,
+                                                       animation: false,
+                                                       customClass: {
+                                                         popup: 'animated tada'
+                                                       }
+                                                     
+                                                     })
+                                            }
+                                          });
+                                        </script>
                                       </div>
                                   </td>
                                 </tr>
                                        
                                     </tbody>
                                 </table>
-                                <script>
-                                    $(document).ready(function(){
-                                      // for add new type button
-                                      var maxField = 30; //Input fields increment limitation
-                                      var addButton = $('#addOptions'); //Add button selector
-                                      
-                                      var wrapper = $('.field_wrapper'); //Input field wrapper
-                                      // var fieldHTML = '<div class="form-check"><input class="form-check-input remove_button" type="radio" id="#" name="type" value="'+new_type+'" ><label class="form-check-label" for="example-radios-default1">'+new_type+'</label></div>';
-                                      // '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
-                                      var x = 1; //Initial field counter is 1
-                                      
-                                      //Once add button is clicked
-                                      $(addButton).click(function(){
-                                          //Check maximum number of input fields
 
-                                          var new_symptoms = $('.new_type').val();
-                                          var fieldHTML = '<div class="col-md-4 mb-3"><label for="validationServer01">Option '+x+'</label><input type="text" name="options[]" class="form-control is-valid"  id="validationServer01" placeholder="Please Type In Options '+x+'"></div>';
-
-                                          if(x < maxField ){ 
-                                              x++; //Increment field counter
-                                              $(wrapper).append(fieldHTML); //Add field html
-                                          }
-                                      });
-                                      
-                                      //Once remove button is clicked
-                                      $(wrapper).on('click', '.remove_button', function(e){
-                                          e.preventDefault();
-                                          $(this).parent('div').remove(); //Remove field html
-                                          x--;
-                                          //Decrement field counter
-                                      });
-                                      // end add new type button
-                                  });
-                                </script>
+                                    
                                 @endforeach
                                 
-                              @endif
+                             
                                
                             </div>
                             <div class="col-sm-6">
@@ -249,6 +317,8 @@
                           </form>
                         </div>
                     </div>
+                    @endif 
+                    
                     @endif
                     <!-- END Full Table -->
 <!-- </form> -->

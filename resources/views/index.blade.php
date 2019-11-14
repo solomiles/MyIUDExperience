@@ -14,8 +14,7 @@
             <h1>Welcome to {{ config('app.name','MYIUD')}}</h1>
 
             <p>
-              Explore our free Personalized Tools to Track, Monitor, and Manage
-              your cycles
+            A website dedicated to helping women take control of their reproductive health
             </p>
             @guest
             <a href=" {{ route('register') }} " class="btn-white scrool">{{ __('Join Now')}}</a>
@@ -81,12 +80,11 @@
           <!--begin col-md-12 -->
           <div class="col-md-12 text-center">
             <h2 class="section-title">
-              Integrated solution to help woman <br>make informed decision on IUD
+            Helping women make informed decisions about hormonal and <br>copper intrauterine devices (IUDs)
             </h2>
 
             <p class="section-subtitle">
-              To help women make informed decision with regards to IUDs
-              (hormonal IUD Merina and copper IUD Paragard),
+            myIUDexperience symptoms tracker helps current and former hormonal and copper IUD users chart<br> new and reoccurring symptoms and learn how those symptoms impact their daily lives.
             </p>
           </div>
           <!--end col-md-12 -->
@@ -99,11 +97,10 @@
               <h3>Period & Symptom Tracker</h3>
 
               <p>
-                Curabitur quam etsum lacus netsum nulat iaculis ets vitae etsum
-                nisle varius sed aliquam ets vitae netsum.
+              By tracking more frequently you can define what is normal or not for your body
               </p>
 
-              <a href="{{ route('register') }}" class="btn-blue-line small scrool">Learn More</a>
+              <a href="{{ url('profile') }}" class="btn-blue-line small scrool">Learn More</a>
             </div>
           </div>
           <!--end col-md-4 -->
@@ -116,8 +113,7 @@
               <h3>Join Our Community</h3>
 
               <p>
-                Curabitur quam etsum lacus netsum nulat iaculis ets vitae etsum
-                nisle varius sed aliquam ets vitae netsum.
+              Community forum provides a support system of women to discuss your experience with IUD, and learn from those who have been there.
               </p>
 
               <a href="{{ route('forum.index') }}" class="btn-blue-line small scrool">Learn More</a>
@@ -133,11 +129,10 @@
               <h3>Donate</h3>
 
               <p>
-                Curabitur quam etsum lacus netsum nulat iaculis ets vitae etsum
-                nisle varius sed aliquam ets vitae netsum.
+              Your donation will help support maintenance and updates.
               </p>
 
-              <a href="#" class="btn-blue-line small scrool">Connect</a>
+              <a href="#" class="btn-blue-line small scrool">Donate</a>
             </div>
           </div>
           <!--end col-md-4 -->
@@ -192,10 +187,10 @@
         <div class="row">
           <!--begin col-md-12-->
           <div class="col-md-12 text-center">
-            <h2 class="section-title">Our Blog</h2>
+            <h2 class="section-title">Blog</h2>
 
             <p class="section-subtitle">
-              Latest news, tips and best practices.
+            The latest academic research, new articles, and stories. Feel free to explore and read.
             </p>
           </div>
           <!--end col-md-12-->

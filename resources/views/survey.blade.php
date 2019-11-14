@@ -52,7 +52,7 @@
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'MyiudExperience') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -212,25 +212,7 @@
     //     // cancelButtonAriaLabel: 'Thumbs down',
     // })
 
-    // Swal.fire({
-    //     title: '<strong>User Demographic Information</strong>',
-    //     type: 'info',
-    //     html:
-    //     'Your responses are important as it will be use to help other'+ 
-    //     'woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'+
-    //     'Please lets help each other.'+
-    //     ' <em>"Correlation does not imply causation but it can start a conversation."</em>',
-    //     showCloseButton: true,
 
-    //     focusConfirm: true,
-
-    //     confirmButtonAriaLabel: 'Thumbs up, great!',
-    //     animation: false,
-    //     customClass: {
-    //     popup: 'animated tada'
-    //     }
-    //     // cancelButtonAriaLabel: 'Thumbs down',
-    // })
     Swal.mixin({
         // input: 'text',
         type: 'info',
@@ -244,15 +226,7 @@
         }).queue([
         {
             title: '<strong>User Demographic Information</strong>',
-            text: 'Please be honest when filling this survey. The survey takes less than 5 minutes.'
-        },
-        {
-            title: '<strong>User Demographic Information</strong>',
             text: 'Your responses are important as it will be use to help other woman make informed decision regarding the use of levonorgestrel-releasing intrauterine (hormonal IUD).'
-        },
-        {
-            title: '<strong>User Demographic Information</strong>',
-            text: 'Please lets help each other.'
         }
         ]).then( (result) => {
         

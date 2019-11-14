@@ -26,7 +26,8 @@
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-
+        <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+        
       <style>
           canvas {
               -moz-user-select: none;

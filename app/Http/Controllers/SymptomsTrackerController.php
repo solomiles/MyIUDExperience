@@ -6,6 +6,7 @@ use App\symptoms;
 use App\SymptomsCategory;
 use App\symptomsTracker;
 use Illuminate\Http\Request;
+use Redirect,Response;
 
 class SymptomsTrackerController extends Controller
 {
@@ -21,6 +22,15 @@ class SymptomsTrackerController extends Controller
     public function index()
     {
         //
+        // if(request()->ajax()) 
+        // {
+ 
+        //  $created_at = (!empty($_GET["created_at"])) ? ($_GET["created_at"]) : ('');
+        //  $updated_at = (!empty($_GET["updated_at"])) ? ($_GET["updated_at"]) : ('');
+ 
+        //  $data = symptoms::whereDate('created_at', '>=', $created_at)->whereDate('updated_at',   '<=', $updated_at)->get(['id','title','start', 'end']);
+        //  return Response::json($data);
+        // }
         $id = auth::user()->id;
         $symptoms = SymptomsCategory::all();
         $trackedDate = symptomsTracker::where('user_id', '=', $id)->distinct()->get(['created_at']);
@@ -49,6 +59,10 @@ class SymptomsTrackerController extends Controller
         //
         $symptomsId = $request->symptoms_id;
         $symptomsLevel = $request->symptoms_level;
+        $this->validate($request, [
+            
+            'symptoms_level' => 'required',
+        ]);
         if ( is_array($symptomsLevel) && !is_null($symptomsLevel[0]) ) {
             # code...
             $results = [];
@@ -60,6 +74,7 @@ class SymptomsTrackerController extends Controller
                     $symptomsTracker->symptoms_id = $symptomsId[$key];
                     $symptomsTracker->symptoms_level = $symptomsLevel[$key]; 
                 // );
+                    $symptomsTracker->created_at = Date('Y-m-d');
                 $symptomsTracker->save();   
                  $results[] = $symptomsTracker;
 
@@ -69,7 +84,10 @@ class SymptomsTrackerController extends Controller
             return redirect()->back()
                 ->with(['results' => $results]);
         }
-        // dd($results);
+        // // dd($results);
+        // $errors = ['Kindly select at least 1 symptoms','Whoops!'];
+        // return redirect()->back()
+        //     ->with(['errors' => $errors]);
     }
 
     /**

@@ -12,10 +12,10 @@
         <div class="row">
           <!--begin col-md-8-->
           <div class="col-md-8 mx-auto padding-top-50">
-            <h1>About MYIUD</h1>
-            <p>
+            <h1>About Intrauterine Device (IUD)</h1>
+            <!-- <p>
               A brief introductory on MYIUD
-            </p>
+            </p> -->
           </div>
           <!--end col-md-8-->
         </div>
@@ -33,38 +33,52 @@
         <div class="row">
           <!--begin col-md-12 -->
           <div class="col-md-12 text-center">
-            <h2 class="section-title">
-              About MYIUD
-            </h2>
+          <h4 class="section-title">
+              About Intrauterine Device (IUD)
+            </h4>
 
             <p class="section-subtitle">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci 
-              minima corporis ullam at sunt, autem assumenda velit possimus illo ipsam 
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci
+              minima corporis ullam at sunt, autem assumenda velit possimus illo ipsam
+              dicta a ea quia rerum! Voluptate mollitia sequi libero.
+            </p>
+            <h5 class="section-title">
+              What is an IUD
+            </h4>
+
+            <p class="section-subtitle">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci
+              minima corporis ullam at sunt, autem assumenda velit possimus illo ipsam
+              dicta a ea quia rerum! Voluptate mollitia sequi libero.
+            </p>
+
+            <h5 class="section-title">
+              Why create myIUDexperience
+            </h4>
+
+            <p class="section-subtitle">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. In adipisci
+              minima corporis ullam at sunt, autem assumenda velit possimus illo ipsam
               dicta a ea quia rerum! Voluptate mollitia sequi libero.
             </p>
           </div>
           <!--end col-md-12 -->
 
-          <!--begin col-md-4 -->
-          <!-- <div class="col-md-4">
-            <div class="main-services">
-              <img src="images/main-service1.png" class="width-100" alt="pic" />
-
-              <h3>Period Tracker</h3>
-
-              <p>
-                Curabitur quam etsum lacus netsum nulat iaculis ets vitae etsum
-                nisle varius sed aliquam ets vitae netsum.
-              </p>
-
-              <a href="#about" class="btn-blue-line small scrool">Learn More</a>
-            </div>
-          </div> -->
-          <!--end col-md-4 -->
-
       </div>
       <!--end container -->
     </section>
     <!--end section-grey -->
+    <section class="section-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <h3 class="section-title">
+              The woman behind <br><span style="color: #87cbcf;">{{ config('app.name') }}</span>
+            </h3>
+            
+          </div>
+        </div>
+      </div>
+    </section>
 
 @endsection

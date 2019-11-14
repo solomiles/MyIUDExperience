@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\symptoms;
 use App\SymptomsCategory;
 use Illuminate\Http\Request;
+use Redirect,Response;
 
 class SymptomsController extends Controller
 {
@@ -45,6 +46,18 @@ class SymptomsController extends Controller
     public function store(Request $request)
     {
         //
+        if(request()->ajax()) 
+        {
+            $insertArr = [ 'symptoms_category_id' => $request->categoryId,
+                        'symptoms_name' => $request->symptomsName,
+                        'created_at' => Date('Y-m-d'),
+                        'updated_at' => Date('Y-m-d'),
+                      
+                        ];
+            $event = symptoms::insert($insertArr);   
+            return Response::json($event);
+        }
+
         $this->validate($request, [
             
             'category' => 'required',

@@ -56,9 +56,10 @@
     <!--end section-grey -->
     @foreach($results as $result)
       
-        <!-- <input type="hidden" value="{{$result->symptoms->symptoms_name}}"> -->
+        <input type="hidden" value="{{$result->symptoms->symptoms_name}}"> 
       
     @endforeach
+
    <script>
    var shows = @json($results->toArray());
    var symptoms = [];
@@ -94,7 +95,8 @@
           
           label: "Cycle Started "+day.toDateString(),
           data: levels,
-          backgroundColor: '#f0f',
+          backgroundColor: ["#76b1f1", "#6f42c1","#e83e8c",],
+          hoverBackgroundColor: "#2189f9",
           fill: false
         }]
       },
@@ -119,8 +121,7 @@
                     return 'Moderate';
                   else if (value === 80)
                     return 'Severe';
-                  else if (value === 100)
-                    return 'hjd';
+                  
                 },
                 display: true,
               fontColor: '#2196f3',

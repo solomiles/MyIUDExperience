@@ -12,9 +12,9 @@
         <div class="row">
           <!--begin col-md-8-->
           <div class="col-md-8 mx-auto padding-top-50">
-            <h1>Forum Discussion</h1>
+            <h1>Forum</h1>
             <p>
-                Connect with other members of the community 
+            Community forum provides a support system of women to discuss your experience with IUD, and learn from those who have been there.
             </p>
           </div>
           <!--end col-md-8-->
@@ -171,5 +171,7 @@
 
         </div>
         </div>
+        </section>
+        
 @endsection
     
