@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSymptomsTable extends Migration
+class CreateSymptomsTrackerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateSymptomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('symptoms', function (Blueprint $table) {
+        Schema::create('symptoms_trackers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->string('type');
-            $table->string('apperance_change');
-            $table->string('physical_pain');
-            $table->string('gynecological_issue');
-            $table->string('mental_health');
-            $table->string('other');
+            $table->unsignedBigInteger('symptoms_id');
+            $table->foreign('symptoms_id')->references('id')
+            ->on('symptoms')
+            ->onDelete('cascade');
+            $table->string('symptoms_level')->nullable($value = true);
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ class CreateSymptomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('symptoms');
+        Schema::dropIfExists('symptoms_trackers');
     }
 }

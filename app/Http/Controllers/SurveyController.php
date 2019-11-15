@@ -44,28 +44,35 @@ class SurveyController extends Controller
     {
         //
         // echo 'hit';
+        // store survey question
         $survey =  new Survey;
         
         $survey->question = $request->question;
         $survey->type = $request->type;
         $survey->save();
 
-        $options = new Options;
-        $options->survey_id = $survey->id;
-        $options->option_one = $request->optionOne;
-        $options->option_two = $request->optionTwo;
-        $options->option_three = $request->optionThree;
-        $options->option_four = $request->optionFour;
-        $options->option_five = $request->optionFive;
-        $options->option_six = $request->optionSix;
-        $options->option_seven = $request->optionSeven;
-        $options->option_eight = $request->optionEight;
-        $options->save();
+        // store options 
+        
+        $array = $request->options;
+        
+
+        if ( is_array($array) && !is_null($array[0]) ) {
+            # code...
+            
+            foreach ($array as $key => $value) {
+                # code...
+                $options = new Options;
+                $options->survey_id = $survey->id;
+                $options->options = $array[$key];
+                $options->save();
+            }
+        }
+        
         
         // dd($survey->id);
         // $options = new Options;
         
-
+        // redirect after saving
         return redirect()->route('add-survey-questions.index')
             ->with('success', 'Question added successfully');
 
@@ -111,8 +118,15 @@ class SurveyController extends Controller
      * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Survey $survey)
+    public function destroy(Survey $survey,$id)
     {
         //
+        // dd($id);
+        survey::find($id)->delete();
+        
+            return redirect()->route('manage-symptoms.index')
+    
+                ->with('success','Symptoms deleted successfully');
+    
     }
 }

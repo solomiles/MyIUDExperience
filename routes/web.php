@@ -19,7 +19,7 @@ Auth::routes(['verify' => true]); //['verify' => true]
 
 
 Route::get('/', 'HomeController@index')->name('index');
-
+Route::resource('home', 'HomeController');
 Route::resource('survey', 'ResponseController');
 
 Route::resource('forum', 'ForumController'); //forum route
@@ -35,7 +35,7 @@ Route::resource('manage-blog', 'BlogController'); // admin blog control route
 Route::resource('add-survey-questions', 'SurveyController'); // admin blog control route
 
 
-Route::get('manage-symptoms', 'AdminController@manageSymptoms');
+// Route::get('manage-symptoms', 'AdminController@manageSymptoms');
 
 Route::get('contact', function() {
     return view('contact');
@@ -51,8 +51,15 @@ Route::resource('blog-post', 'HomeController'); // full blog post
 
 Route::resource('profile', 'ProfileController'); //user profile
 
-Route::resource('track-symptoms', 'SymptomsController');
+Route::resource('manage-symptoms', 'SymptomsController'); // admin add symptoms name
 
-Route::get('period-tracker', function() {
-    return view('period_tracker');
-});
+Route::resource('track-symptoms', 'SymptomsTrackerController'); // track Symptoms
+
+Route::resource('period-tracker', 'EventController');
+Route::post('add-new-symptoms/store', 'SymptomsController@store');
+Route::get('track-symptoms', 'SymptomsTrackerController@index');
+
+// 
+Route::get('tracked-symptoms-result','SymptomsController@result');
+
+Route::post('daily-symptoms-chart', 'SymptomsTrackerController@dailyGraph');

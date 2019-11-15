@@ -11,8 +11,8 @@
         <div class="row">
           <!--begin col-md-8-->
           <div class="col-md-8 mx-auto padding-top-50">
-            <h1>Contact Us</h1>
-            <p>Do you need any assistance with your plan? Let us know!</p>
+          <h1>Contact Me</h1>
+            <p>Do you have a question, suggestion, or just want to say, <br>“Thank you” Let me know</p>
           </div>
           <!--end col-md-8-->
         </div>
@@ -24,8 +24,11 @@
 
     <!--begin section-grey -->
     <section class="section-grey section-top-border">
-      
-     
+      <div class="container">
+        <div class="row">
+          
+        </div>
+      </div>
     </section>
     <!--end section-grey -->
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Blog;
+use App\Response;
 class HomeController extends Controller
 {
     /**
@@ -24,8 +26,22 @@ class HomeController extends Controller
     public function index()
     {
         $blogPosts = Blog::orderBy('created_at','DESC')->paginate(3);
+        $id = Auth::id();
+        if ($id !== '') {
+            # code...
+            $hasCompletedSurvey = Response::where('user_id',$id)->first();
+            if ($hasCompletedSurvey !== '') {
+                # code...
+                return view('index', compact(['blogPosts','hasCompletedSurvey']));
+
+            }
+            
+            
+        } else{
+        
 
         return view('index', compact('blogPosts'));
+        }
     }
 
     public function display()

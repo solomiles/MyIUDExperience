@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\symptoms;
+use App\SymptomsCategory;
 use Illuminate\Http\Request;
+use Redirect,Response;
 
 class SymptomsController extends Controller
 {
@@ -19,8 +21,10 @@ class SymptomsController extends Controller
     public function index()
     {
         //
+        $symptomsCategories = SymptomsCategory::all();
 
-        return view('symptoms_myiud');
+        return view('admin.manage_symptoms', compact('symptomsCategories'));
+        // return view('symptoms_myiud');
     }
 
     /**
@@ -42,51 +46,45 @@ class SymptomsController extends Controller
     public function store(Request $request)
     {
         //
-        $app = '';
-        $phy = '';
-        $gyne = '';
-        $ment = '';
-        $oth = '';
-        $type = $request->type;
-        $appearances = $request->appearance;
-        foreach ($appearances as $appearance) {
-            # code...
-            $app.=$appearance.',';
+        if(request()->ajax()) 
+        {
+            $insertArr = [ 'symptoms_category_id' => $request->categoryId,
+                        'symptoms_name' => $request->symptomsName,
+                        'created_at' => Date('Y-m-d'),
+                        'updated_at' => Date('Y-m-d'),
+                      
+                        ];
+            $event = symptoms::insert($insertArr);   
+            return Response::json($event);
         }
-        $physicals = $request->physical;
-        foreach ($physicals as $physical) {
-            # code...
-            $phy.=$physical.',';
-        }
-        $gynecologicals = $request->gynecological;
-        foreach ($gynecologicals as $gynecological) {
-            # code...
-            $gyne.=$gynecological.',';
-        }
-        $mentals = $request->mental;
-        foreach ($mentals as $mental) {
-            # code...
-            $ment.=$mental.',';
-        }
-        $others = $request->other;
-        foreach ($others as $other) {
-            # code...
-            $oth.=$other.',';
-        }
-        $symptoms = new symptoms;
-    
-        $symptoms->user_id = $request->user()->id;
-        $symptoms->type = $type;
-        $symptoms->apperance_change = $app;
-        $symptoms->physical_pain = $phy;
-        $symptoms->gynecological_issue = $gyne;
-        $symptoms->mental_health = $ment;
-        $symptoms->other = $oth;
-        $symptoms->save();
 
-        return redirect()->route('track-symptoms.index')
-            ->with('success', 'Symptoms Tracked Successfully');
-        // dd($request->user()->id, $type, $app, $phy, $gyne, $ment, $oth);
+        $this->validate($request, [
+            
+            'category' => 'required',
+        ]);
+        $symptoms_category = new SymptomsCategory;
+        $symptoms_category->category = $request->category;
+        $symptoms_category->save();
+
+        $array = $request->options;
+        
+
+        if ( is_array($array) && !is_null($array[0]) ) {
+            # code...
+            
+            foreach ($array as $key => $value) {
+                # code...
+                $symptoms = new symptoms;
+                $symptoms->symptoms_category_id = $symptoms_category->id;
+                $symptoms->symptoms_name = $array[$key];
+                $symptoms->save();
+            }
+        }
+        
+        return redirect()->route('manage-symptoms.index')
+            ->with('success', 'Symptoms added successfully');
+
+        
     }
 
     /**
@@ -98,6 +96,18 @@ class SymptomsController extends Controller
     public function show(symptoms $symptoms)
     {
         //
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\symptomsTracker  $symptomsTracker
+     * @return \Illuminate\Http\Response
+     */
+    public function result()
+    {
+        //
+        return view('symptoms_myiud_result');
     }
 
     /**
@@ -129,8 +139,15 @@ class SymptomsController extends Controller
      * @param  \App\symptoms  $symptoms
      * @return \Illuminate\Http\Response
      */
-    public function destroy(symptoms $symptoms)
+    public function destroy(symptoms $symptoms,$id)
     {
         //
+        // dd($id);
+        SymptomsCategory::find($id)->delete();
+        
+            return redirect()->back()
+    
+                ->with('success','Symptoms deleted successfully');
+    
     }
 }

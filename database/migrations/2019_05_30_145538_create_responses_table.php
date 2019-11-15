@@ -15,6 +15,10 @@ class CreateResponsesTable extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('survey_id');
             $table->foreign('survey_id')->references('id')
                 ->on('surveys')

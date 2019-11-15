@@ -47,8 +47,12 @@ class User extends Authenticatable implements MustVerifyEmail
        return $this->hasMany(ForumComments::class);
    }
 
-   public function symptoms()
+   public function symptomstracker()
    {
-       return $this->hasMany(symptoms::class);
+       return $this->hasMany(symptomsTracker::class);
+   }
+   public function response()
+   {
+       return $this->hasMany(Response::class);
    }
 }

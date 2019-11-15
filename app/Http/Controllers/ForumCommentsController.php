@@ -58,7 +58,7 @@ class ForumCommentsController extends Controller
         $forumComments->comments = $comments;
         $forumComments->save();
 
-        return redirect()->route('forum.index')
+        return redirect()->back()
             ->with('success', 'Thanks for sharing your thoughts with us');
     }
 

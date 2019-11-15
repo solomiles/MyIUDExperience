@@ -71,18 +71,57 @@
                             <span class="nav-main-link-name">Manage User Account</span>
                         </a>
                     </li>
-                    <li class="nav-main-item">
+                    <!-- <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ url('add-survey-questions')}}">
                             <i class="nav-main-link-icon si si-user-female"></i>
                             <span class="nav-main-link-name">Manage Survey</span>
                         </a>
-                    </li>
+                    </li> -->
+                    
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ url('manage-symptoms')}}">
-                            <i class="nav-main-link-icon si si-user-female"></i>
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-note"></i>
+                            <span class="nav-main-link-name">Manage Survey</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-survey-questions')}}">
+                                    <span class="nav-main-link-name">Add Survey Questions</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="#">
+                                    <span class="nav-main-link-name">Manage Survey Response</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-new-category')}}">
+                                    <span class="nav-main-link-name">Add Category</span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-bulb"></i>
                             <span class="nav-main-link-name">Manage Symptoms</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('manage-symptoms')}}">
+                                    <i class="nav-main-link-icon si si-user-female"></i>
+                                    <span class="nav-main-link-name">Add Symptoms</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-main-item">
+                                <a class="nav-main-link" href="{{ url('add-new-category')}}">
+                                    <span class="nav-main-link-name">Add Category</span>
+                                </a>
+                            </li> -->
+                        </ul>
                     </li>
+                    
 
                     <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -224,6 +263,41 @@
 
        <!-- Page JS Code -->
        <script src="{{ asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
+       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+       <script>
+           $(document).ready(function(){
+            // for add new type button
+            var maxField = 30; //Input fields increment limitation
+            var addButton = $('#addOptions'); //Add button selector
+            
+            var wrapper = $('.field_wrapper'); //Input field wrapper
+            // var fieldHTML = '<div class="form-check"><input class="form-check-input remove_button" type="radio" id="#" name="type" value="'+new_type+'" ><label class="form-check-label" for="example-radios-default1">'+new_type+'</label></div>';
+            // '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
+            var x = 1; //Initial field counter is 1
+            
+            //Once add button is clicked
+            $(addButton).click(function(){
+                //Check maximum number of input fields
+
+                // var new_type = $('.new_type').val();
+                var fieldHTML = '<div class="col-md-4 mb-3"><label for="validationServer01">Option '+x+'</label><input type="text" name="options[]" class="form-control is-valid"  id="validationServer01" placeholder="Please Type In Options '+x+'"></div>';
+
+                if(x < maxField ){ 
+                    x++; //Increment field counter
+                    $(wrapper).append(fieldHTML); //Add field html
+                }
+            });
+            
+            //Once remove button is clicked
+            $(wrapper).on('click', '.remove_button', function(e){
+                e.preventDefault();
+                $(this).parent('div').remove(); //Remove field html
+                x--;
+                //Decrement field counter
+            });
+            // end add new type button
+        });
+       </script>
 
 </body>
 

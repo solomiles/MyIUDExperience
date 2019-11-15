@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOptionsTable extends Migration
+class SymptomsCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('options', function (Blueprint $table) {
+        //
+        Schema::create('symptoms_categories', function(Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('survey_id');
-            $table->foreign('survey_id')->references('id')
-                ->on('surveys')
-                ->onDelete('cascade');
-            $table->text('options')->nullable($value = true);
-            
+            $table->string('category');
             $table->timestamps();
         });
     }
@@ -32,6 +28,7 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('options');
+        //
+        Schema::dropIfExists('symptoms_categories');
     }
 }

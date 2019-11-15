@@ -38,92 +38,126 @@
 
         <!-- Font Favicon -->
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
-        <link href="{{ asset('packages/core/main.css')}}" rel='stylesheet' />
-        <link href="{{ asset('packages/daygrid/main.css')}}" rel='stylesheet' />
-
-        <script src="{{ asset('packages/core/main.js')}}"></script>
-        <script src="{{ asset('packages/interaction/main.js')}}"></script>
-        <script src="{{ asset('packages/daygrid/main.js')}}"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
         <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: [ 'interaction', 'dayGrid' ],
-            now: new Date(),
-            selectable: true,
-            selectHelper: true,
-            editable: true, // enable draggable events
-            aspectRatio: 1.8,
-            scrollTime: '00:00', // undo default 6am scrollTime
-            header: {
-                left: 'today prev,next',
-                center: 'title',
-                right: 'dayGridMonth'
-            },
-            defaultView: 'dayGridMonth',
-            views: {
-                resourceTimelineThreeDays: {
-                type: 'resourceTimeline',
-                duration: { days: 3 },
-                buttonText: '3 days'
+  $(document).ready(function () {
+         
+        var SITEURL = "{{url('/')}}";
+        
+        // console.log(token);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+ 
+        var calendar = $('#calendar').fullCalendar({
+            editable: true,
+            events: "{{url('period-tracker')}}",
+            displayEventTime: true,
+            editable: true,
+            eventRender: function (event, element, view) {
+                if (event.allDay === 'true') {
+                    event.allDay = true;
+                } else {
+                    event.allDay = false;
                 }
             },
-            
-            // select: function(arg) {
-            //     // arg.start: '2019-05-07',
-            //     // arg.end: '2019-05-15',
-            //     console.log(
-            //     'select callback',
-            //     arg.startStr,
-            //     arg.endStr,
-            //     arg.resource ? arg.resource.id : '(no resource)'
-            //     );
-            // },
-            dateClick: function(arg,now,stop) {
-        
-                now = new Date(arg.date);
-                stop = new Date(arg.date);
-
-                now.setDate(now.getDate() + 15);
-                stop.setDate(stop.getDate() + 18);
-
-                calendar.select({
-                start: now,
-                end: stop,
-                // resourceId: 'g'
-                });
-            swal({
-                title: "Your next Period",
-                
-                text: "Starts : "+now+
-                "\nEnds : "+stop,
-                icon: "success",
-            });
-            console.log( now,stop);
-            // console.log(
-            //   'dateClick',
-            //   arg.date,
-            //   arg.resource ? arg.resource.id : '(no resource)'
-            // );
+            selectable: true,
+            selectHelper: true,
+            select: function (start, end, allDay) {
+                var title = prompt('Event Title:');
+ 
+                if (title) {
+                    var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+                    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+                  // console.log(start);
+                    $.ajax({
+                        url: "{{url('period-tracker/store')}}",
+                        data: { title: title, start: start, end: end},
+                        type: "POST",
+                        dataType: "json",
+                        beforeSend(xhr,data){
+                          console.log(data);
+                        },
+                        success: function (data) {
+                            displayMessage("Added Successfully");
+                            
+                        }
+                    });
+                    calendar.fullCalendar('renderEvent',
+                            {
+                                title: title,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                    true
+                            );
+                }
+                calendar.fullCalendar('unselect');
             },
-                // events: [
-                //   {
-                //     start: '2019-05-10',
-                //     end: '2019-05-25',
-                //     rendering: 'background'
-                //   }
-                // ]
-            });
-
-            calendar.render();
-            swal("Select your last Period date to calculate your next Period dates.");
-
+             
+            eventDrop: function (event, delta) {
+                        var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+                        var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+                        $.ajax({
+                            url: "{{url('period-tracker/update')}}",
+                            data: {title: event.title,start: start ,end: end, id: + event.id},
+                            type: "POST",
+                            success: function (response) {
+                                displayMessage("Updated Successfully");
+                            }
+                        });
+                    },
+            eventClick: function (event) {
+                var deleteMsg = confirm("Do you really want to delete?");
+                if (deleteMsg) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{url('period-tracker/delete')}}",
+                        data: {id: event.id},
+                        success: function (response) {
+                            if(parseInt(response) > 0) {
+                                $('#calendar').fullCalendar('removeEvents', event.id);
+                                displayMessage("Deleted Successfully");
+                            }
+                        }
+                    });
+                }
+            }
+ 
         });
-
-        </script>
+  });
+ 
+  function displayMessage(message) {
+    // $(".response").html("<div class='success'>"+message+"</div>");
+    Swal.fire({
+                // title: '<strong>Welcome</strong>',
+                type: 'success',
+                html:
+                  message,
+                // confirmButtonAriaLabel: 'Thumbs up, great!',
+                showCloseButton: true,
+                showConfirmButton: true,
+                // showCancelButton: true,
+                focusConfirm: true,
+                // cancelButtonText:
+                // 'Not now!',
+                animation: false,
+                customClass: {
+                  popup: 'animated tada'
+                }
+                // cancelButtonAriaLabel: 'Thumbs down',
+              })
+    // setInterval(function() { $(".success").fadeOut(); }, 6000);
+  }
+</script>
         <style>
 
             body {
@@ -252,9 +286,15 @@
     <!--end header --><br><br><br>
     <div class="container">
         <div class="row">
-            <div id='calendar'></div>
+        <!-- <div class="response">
+            <script>
+                    
+            </script>
+        </div> -->
+      <div id='calendar'></div>
         </div>
     </div>
+    
 
 <!--begin footer -->
 <div class="footer">
@@ -275,7 +315,7 @@
     <!--end footer -->
 
     <!-- Load JS here for greater good =============================-->
-    <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <!-- <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script> -->
     <script src="{{ asset('js/bootstrap.min.js')}}"></script>
     
     

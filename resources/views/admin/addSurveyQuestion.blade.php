@@ -9,7 +9,7 @@
                 <div class="content content-full">
                     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                         <h1 class="flex-sm-fill h3 my-2">
-                            Manage Survey
+                            Add Survey Questions
                         </h1>
                         <!--<nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-alt">
@@ -69,69 +69,32 @@
                                         <div class="col-md-3 mb-3">
                                             <label for="validationServer02">Option Type</label>
                                             <select class="form-control is-valid" name="type" required id="validationServer02" placeholder="Please Type In First Option">
-                                                <option value="text" selected >Default</option>
+                                                <option value="text" selected >Text</option>
                                                 <option value="radio">Radio</option>
                                                 <option value="checkbox">CheckBox</option>
                                             </select>
                                         
                                         </div>
 
-                                        <div class="col-md-3 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionOne" class="form-control is-valid" id="validationServer02" placeholder="Please Type In First Option">
-                                        
-                                        </div>
-
-                                        <div class="col-md-3 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionTwo" class="form-control is-valid" id="validationServer02" placeholder="Please Type In Second Option">
-                                        
-                                        </div>
                                     </div>
 
-                                    <div class="form-row">
+                                    <div class="form-row  field_wrapper">
                                         <div class="col-md-4 mb-3">
                                             <label for="validationServer01">Option</label>
-                                            <input type="text" name="optionThree" class="form-control is-valid"  id="validationServer01" placeholder="Please Type In Third Option">
+                                            <input type="text" name="options[]" class="form-control is-valid"  id="validationServer01" placeholder="Please Type In Option">
                                         
                                         </div>
-
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionFour" class="form-control is-valid" id="validationServer02" placeholder="Please Type In Fourth Option">
+                                        <!-- <div class="field_wrapper"></div> -->
                                         
-                                        </div>
-
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionFive" class="form-control is-valid" id="validationServer02" placeholder="Please Type In Fifth Option">
-                                        
-                                        </div>
                                         
                                         
                                     </div>
 
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationServer01">Option</label>
-                                            <input type="text" name="optionSix" class="form-control is-valid"  id="validationServer01" placeholder="Please Type In Third Option">
-                                        
-                                        </div>
+                                    
 
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionSeven" class="form-control is-valid" id="validationServer02" placeholder="Please Type In Fourth Option">
-                                        
-                                        </div>
+                                    
 
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationServer02">Option</label>
-                                            <input type="text" name="optionEight" class="form-control is-valid" id="validationServer02" placeholder="Please Type In Fifth Option">
-                                        
-                                        </div>
-                                        
-                                        
-                                    </div>
+                                    <button type="button" id="addOptions" class="btn btn-primary">Add Options</button><br><br>
                                     
                                     
                                     <button class="btn btn-primary" type="submit">Submit</button>
@@ -146,14 +109,8 @@
                                     <th class="text-center sorting_asc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: activate to sort column descending">S/N</th>
                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Question: activate to sort column ascending">Question</th>
                                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending">Type</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option one</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option two</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option three</th>
-                                    <th class="text-center sorting_asc" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Option: activate to sort column descending">Option four</th>
-                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option five</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option six</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option seven</th>
-                                    <th class="sorting"  tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Option: activate to sort column ascending">Option eight</th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_3" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+
                                 </thead>
                                 <tbody>
                                     @if(count($surveys) > 0)
@@ -168,32 +125,18 @@
                                             <td class="font-w600 ">
                                                 {{ $survey->type }}
                                             </td>
-                                            @foreach($survey->options as $option)
-                                            <td class="font-w600 ">
-                                                {{ $option->option_one }}
+                                           
+                                            
+                                            <td class=" ">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary"><span class="fa fa-edit"></span></button>
+                                                    <form action="{{route('add-survey-questions.destroy', $survey->id )}}" method="post">
+                                                        @csrf
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                                                    </form>
                                             </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_two}}
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_three }}
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_four }}
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_five }}
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_six }} 
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_seven }}
-                                            </td>
-                                            <td class="font-w600 ">
-                                                {{ $option->option_eight }}
-                                            </td>
-                                            @endforeach
+                                           
                                             
                                         </tr>
                                         @endforeach

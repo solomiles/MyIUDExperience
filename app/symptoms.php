@@ -9,11 +9,17 @@ class symptoms extends Model
     //
 
     protected $fillable = [
-        'user_id', 'type', 'apperance_change', 'physical_pain', 'gynecological_issue', 'mental_health', 'other',
+        'symptoms_category_id','symptoms_name',
+        
     ];
+   
 
-    public function user()
+   public function symptomstracker()
    {
-       return $this->hasMany(User::class);
+       return $this->hasMany(SymptomsTracker::class);
+   }
+   public function symptomscategory()
+   {
+       return $this->belongsTo(SymptomsCategory::class);
    }
 }
